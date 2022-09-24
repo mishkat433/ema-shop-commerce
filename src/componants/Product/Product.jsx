@@ -7,8 +7,8 @@ const Product = (props) => {
     const { name, seller, price, stock, ratings, img, category } = product;
     return (
         <div className="card bg-cyan-700 shadow-xl">
-            <img className='w-full h-2/5' src={img} alt="figure not found" />
-            <div className="card-body h-[50px] text-white mb-5">
+            <img className='w-full h-[250px]' src={img} alt="figure not found" />
+            <div className="card-body h-[220px] text-white mb-5">
                 <h2 className="card-title">{name}</h2>
                 <div className='flex justify-between items-center mt-3 text-lg'>
                     <p className='font-semibold'>price : ${price} </p>
