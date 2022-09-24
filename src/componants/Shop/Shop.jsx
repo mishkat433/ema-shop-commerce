@@ -35,7 +35,7 @@ const Shop = () => {
                     <p>Selected Items :</p> <p>{cart.length}</p>
                 </div>
                 <div className='flex justify-between px-5'>
-                    <p>Total Prices :</p> <p>{cart[0].price}</p>
+                    <p>Total Prices :</p> <p>{cart.length}</p>
                 </div>
                 <div className='flex justify-between px-5'>
                     <p>Total Shipping Charge :</p> <p>{cart.length}</p>
