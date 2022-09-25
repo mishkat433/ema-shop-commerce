@@ -1,11 +1,15 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import DetailsModal from '../DetailsModal/DetailsModal';
 import Product from '../Product/Product';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [details, setDetails] = useState([]);
+    const [more, setMore] = useState(true);
 
 
     useEffect(() => {
@@ -16,38 +20,43 @@ const Shop = () => {
 
     const addToCartHandle = (item) => {
         const newCart = [...cart, item];
-        setCart(newCart)
+        setCart(newCart);
+    }
+    const handleModal = detail => {
+        setDetails(detail);
     }
 
+
     return (
-        <div className='flex flex-row w-11/12 gap-5 mx-auto ' >
-            {/* product container */}
-            <div className="w-4/5 grid grid-cols-1 lg:grid-cols-3 gap-x-7 gap-y-10 mt-10">
+        <div>
+            <div className='flex flex-col-reverse lg:flex-row w-11/12 gap-5 mx-auto mt-10' >
+                {/* product container */}
+                <div className="w-full lg:w-4/5 grid grid-cols-1 lg:grid-cols-3 gap-x-7 gap-y-10 ">
+                    {
+                        more ? products.slice(0, 21).map(product => <Product product={product} key={product.id} addToCartHandle={addToCartHandle} handleModal={handleModal}></Product>)
+                            :
+                            products.map(product => <Product product={product} key={product.id} addToCartHandle={addToCartHandle} handleModal={handleModal}></Product>)
+                    }
+
+                </div>
+
+                {/* cart container */}
+                <div className="cart-container bg-gray-200 w-full lg:w-1/5 rounded-xl h-[100vh]">
+                    <ShoppingCart cart={cart} setCart={setCart} className="" />
+
+                </div>
+                <DetailsModal details={details} handleModal={handleModal}></DetailsModal>
+
+            </div >
+
+            <div className='flex justify-center my-10'>
                 {
-                    products.map(product => <Product product={product} key={product.id} addToCartHandle={addToCartHandle}></Product>)
+                    more ? <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-xl" onClick={() => setMore(false)}>Show more...</button>
+                        :
+                        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-xl" onClick={() => setMore(true)}>show less...</button>
                 }
             </div>
 
-            {/* cart container */}
-            <div className="cart-container  w-1/5 bg-gray-200 h-[100vh]">
-                <h1 className='text-center text-2xl font-semibold my-10'>Order Summary</h1>
-                <div className='flex justify-between px-5'>
-                    <p>Selected Items :</p> <p>{cart.length}</p>
-                </div>
-                <div className='flex justify-between px-5'>
-                    <p>Total Prices :</p> <p>{cart.length}</p>
-                </div>
-                <div className='flex justify-between px-5'>
-                    <p>Total Shipping Charge :</p> <p>{cart.length}</p>
-                </div>
-                <div className='flex justify-between px-5'>
-                    <p>Tax :</p> <p>{cart.length}</p>
-                </div>
-                <div className='flex justify-between px-5'>
-                    <p>Grand Total :</p> <p>{cart.length}</p>
-                </div>
-
-            </div>
         </div>
     );
 };
