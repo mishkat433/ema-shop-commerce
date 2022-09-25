@@ -41,7 +41,7 @@ const Shop = () => {
                 </div>
 
                 {/* cart container */}
-                <div className="cart-container bg-gray-200 w-full lg:w-1/5 rounded-xl h-[100vh]">
+                <div className="cart-container bg-gray-200 w-full lg:w-1/5 rounded-xl h-[100vh] sticky top-0">
                     <ShoppingCart cart={cart} setCart={setCart} className="" />
 
                 </div>
