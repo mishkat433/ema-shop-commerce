@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { addToDb, getFromLocalDb } from '../../utilities/fakedb';
 import DetailsModal from '../DetailsModal/DetailsModal';
 import Product from '../Product/Product';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
@@ -18,9 +19,35 @@ const Shop = () => {
             .then(data => setProducts(data))
     }, [])
 
+    useEffect(() => {
+        const getFromLocalCart = getFromLocalDb();
+        const savedCart = [];
+        for (const id in getFromLocalCart) {
+            const findProduct = products.find(procuct => procuct.id === id);
+            if (findProduct) {
+                const quantity = getFromLocalCart[id]
+                findProduct.quantity = quantity
+                savedCart.push(findProduct)
+            }
+        }
+        setCart(savedCart)
+    }, [products])
+
     const addToCartHandle = (item) => {
-        const newCart = [...cart, item];
+        const exist = cart.find(product => product.id === item.id);
+        let newCart = []
+        if (!exist) {
+            item.quantity = 1;
+            newCart = [...cart, item]
+        }
+        else {
+            const rest = cart.filter(product => product.id !== item.id)
+            exist.quantity = exist.quantity + 1;
+            newCart = [...rest, exist]
+        }
+
         setCart(newCart);
+        addToDb(item.id);
     }
     const handleModal = detail => {
         setDetails(detail);
