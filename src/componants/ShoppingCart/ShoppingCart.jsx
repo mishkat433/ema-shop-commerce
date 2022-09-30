@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { deleteShoppingCart } from '../../utilities/fakedb';
+import Swal from 'sweetalert2';
 
 const ShoppingCart = ({ cart, setCart }) => {
 
@@ -18,7 +19,13 @@ const ShoppingCart = ({ cart, setCart }) => {
 
     const removeHandle = () => {
         setCart([]);
-        deleteShoppingCart()
+        deleteShoppingCart();
+        Swal.fire(
+            'All Selected item successfully removed',
+            'You clicked the button!',
+            'success'
+        );
+
     }
 
     return (
