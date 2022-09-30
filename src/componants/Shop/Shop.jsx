@@ -43,7 +43,7 @@ const Shop = () => {
         else {
             const rest = cart.filter(product => product.id !== item.id)
             exist.quantity = exist.quantity + 1;
-            newCart = [...rest, exist]
+            newCart = [...rest, exist];
         }
 
         setCart(newCart);
@@ -64,7 +64,6 @@ const Shop = () => {
                             :
                             products.map(product => <Product product={product} key={product.id} addToCartHandle={addToCartHandle} handleModal={handleModal}></Product>)
                     }
-
                 </div>
 
                 {/* cart container */}

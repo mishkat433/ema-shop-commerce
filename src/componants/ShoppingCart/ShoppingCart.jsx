@@ -22,7 +22,7 @@ const ShoppingCart = ({ cart, setCart }) => {
     }
 
     return (
-        <div className='bg-gray-200 '>
+        <div className='bg-gray-200 ' >
             <h1 className='text-center text-2xl font-semibold my-10'>Order Summary</h1>
             <div className='flex flex-col gap-y-3'>
                 <div className='flex justify-between px-5'>
