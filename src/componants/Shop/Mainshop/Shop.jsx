@@ -1,18 +1,18 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { addToDb, getFromLocalDb } from '../../utilities/fakedb';
+import { addToDb, getFromLocalDb } from '../../../utilities/fakedb';
 import DetailsModal from '../DetailsModal/DetailsModal';
-import Product from '../Product/Product';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import Product from '../Product/Product';
+
+
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [details, setDetails] = useState([]);
     const [more, setMore] = useState(true);
-
-
     useEffect(() => {
         fetch("products.json")
             .then(res => res.json())

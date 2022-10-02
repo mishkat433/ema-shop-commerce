@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { deleteShoppingCart } from '../../utilities/fakedb';
+import { deleteShoppingCart } from '../../../utilities/fakedb';
 import Swal from 'sweetalert2';
 
 const ShoppingCart = ({ cart, setCart }) => {
@@ -48,7 +48,7 @@ const ShoppingCart = ({ cart, setCart }) => {
                     <p>Grand Total :</p> <p>${grandTotal}</p>
                 </div>
                 <div className='flex justify-between px-5 mt-5'>
-                    <button className="btn btn-outline border-red-500 border-2 text-red-500 hover:bg-red-500 hover:border-none hover:text-white  w-full px-5  duration-200" onClick={removeHandle}>
+                    <button disabled={cart.length ? false : true} className="btn btn-outline border-red-500 border-2 text-red-500 hover:bg-red-500 hover:border-none hover:text-white  w-full px-5  duration-200" onClick={removeHandle}>
                         Remove All Items <FontAwesomeIcon icon={faTrash} className="ml-5" > </FontAwesomeIcon></button>
                 </div>
             </div>
