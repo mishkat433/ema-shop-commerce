@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from "../../../images/Ema-shop-logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarChart } from '@fortawesome/free-solid-svg-icons';
+import { faHamburger, faClose } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const [bar, setBar] = useState(true)
@@ -12,11 +12,12 @@ const Header = () => {
                 <div className="flex-1">
                     <NavLink to='/'><img className='w-44' src={logo} alt="ema-shop-logo" /></NavLink>
                 </div>
-                <FontAwesomeIcon className='text-white lg:hidden' icon={faBarChart} onClick={() => setBar(!bar)} />
+                {
+                    bar ? <FontAwesomeIcon className='text-white lg:hidden' icon={faClose} onClick={() => setBar(!bar)} /> :
+                        <FontAwesomeIcon className='text-white lg:hidden' icon={faHamburger} onClick={() => setBar(!bar)} />
+                }
                 <div className="flex-none">
-
-
-                    <div className={`${bar ? "block absolute top-16 text-center px-3 pb-2 right-0  bg-cyan-800" : "hidden"} lg:block `}>
+                    <div className={`${bar ? "block absolute lg:static top-16  text-center px-3 pb-2 right-0 rounded-lg  bg-cyan-800" : "hidden"} lg:block `}>
                         <ul className=" lg:flex lg:flex-row gap-8 text-gray-200 text-lg ">
                             <li className='hover:text-white duration-300'><NavLink to='/'></NavLink></li>
                             <li className='hover:text-white duration-300'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/shop'>Shop</NavLink></li>
