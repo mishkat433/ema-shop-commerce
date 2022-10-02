@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHamburger, faClose } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
-    const [bar, setBar] = useState(true)
+    const [bar, setBar] = useState(false)
     return (
         <div className='bg-cyan-800'>
             <div className="navbar w-11/12 mx-auto pb-4">

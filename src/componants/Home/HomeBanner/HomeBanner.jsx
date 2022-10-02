@@ -14,7 +14,7 @@ const HomeBanner = () => {
                     <FontAwesomeIcon className='ml-4 animate-ping text-xl' icon={faArrowRight} /></button>  </Link>
             </div>
             <div className='lg:mr-20'>
-                <img className='w-full ' src={thumbnails} alt="shows" />
+                <img className='w-11/12 lg:w-full ' src={thumbnails} alt="shows" />
             </div>
         </div>
     );
