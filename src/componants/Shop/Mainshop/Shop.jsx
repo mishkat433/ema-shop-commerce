@@ -13,6 +13,9 @@ const Shop = () => {
     const [cart, setCart] = useState([]);
     const [details, setDetails] = useState([]);
     const [more, setMore] = useState(true);
+
+    document.title = "Ema-Shop | Shop"
+
     useEffect(() => {
         fetch("products.json")
             .then(res => res.json())
@@ -75,7 +78,7 @@ const Shop = () => {
 
             </div >
 
-            <div className='flex justify-center my-10'>
+            <div className='flex justify-center my-14'>
                 {
                     more ? <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-xl" onClick={() => setMore(false)}>Show more...</button>
                         :
