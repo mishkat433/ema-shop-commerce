@@ -15,7 +15,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className=''>
+    <div >
       <Header />
       <Routes>
         <Route path='/' element={<MainHome />} />
