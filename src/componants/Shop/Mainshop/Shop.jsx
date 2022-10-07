@@ -79,7 +79,7 @@ const Shop = () => {
                 <div className="cart-container bg-gray-200 w-full lg:w-1/5 rounded-xl pb-10 lg:pb-0 lg:h-[100vh] lg:sticky top-0">
                     <ShoppingCart cart={cart} setCart={setCart} className="">
                         <Link to="/order"><div className='flex justify-between px-5 mt-5'>
-                            <button className="btn btn-outline border-red-500 border-2 text-red-500 hover:bg-red-500 hover:border-none hover:text-white  w-full px-5  duration-200">
+                            <button className="btn btn-outline bg-cyan-700 border-2 text--500 hover:scale-110 hover:bg-cyan-700 border-none text-white hover:border-none hover:text-white  w-full px-5  duration-200">
                                 Review cart </button>
                         </div></Link>
                     </ShoppingCart>

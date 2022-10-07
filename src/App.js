@@ -8,6 +8,8 @@ import MainHome from './componants/Home/MainHome/MainHome';
 // import NotFound from './componants/NotFound/NotFound';
 import Order from './componants/Order.jsx/Order';
 import { Loader } from './Loader/Loader';
+import Inventory from './componants/Inventory/Inventory';
+import NotFound from './componants/NotFound/NotFound';
 
 const App = () => {
 
@@ -20,10 +22,11 @@ const App = () => {
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <NotFound></NotFound>,
       children: [
         {
           index: "/",
-          element: <MainHome />
+          element: <MainHome />,
 
         },
         {
@@ -35,6 +38,11 @@ const App = () => {
         {
           path: "/order",
           element: <Order />,
+          loader: Loader
+        },
+        {
+          path: "/inventory",
+          element: <Inventory />,
           loader: Loader
         },
 

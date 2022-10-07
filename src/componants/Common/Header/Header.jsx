@@ -21,7 +21,7 @@ const Header = () => {
                         <ul className=" lg:flex lg:flex-row gap-8 text-gray-200 text-md lg:text-lg" onClick={() => setBar(false)}>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/shop'>Shop</NavLink></li>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/order'>Order</NavLink></li>
-                            <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink to='/'>Inventory</NavLink></li>
+                            <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/inventory'>Inventory</NavLink></li>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink to='/'>About</NavLink></li>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink to='/'>Login</NavLink></li>
                         </ul>
