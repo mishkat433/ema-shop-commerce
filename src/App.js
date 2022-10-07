@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Route, Routes } from 'react-router-dom';
-import Footer from './componants/Common/Footer/Footer';
-import Header from './componants/Common/Header/Header';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Main from "./Layout/Main"
 import Shop from './componants/Shop/Mainshop/Shop';
 import MainHome from './componants/Home/MainHome/MainHome';
+// import NotFound from './componants/NotFound/NotFound';
+import Order from './componants/Order.jsx/Order';
+import { Loader } from './Loader/Loader';
 
 const App = () => {
 
@@ -14,15 +16,36 @@ const App = () => {
     AOS.refresh()
   }, [])
 
+  const route = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main></Main>,
+      children: [
+        {
+          index: "/",
+          element: <MainHome />
+
+        },
+        {
+          path: "/shop",
+          loader: Loader,
+          element: <Shop />
+
+        },
+        {
+          path: "/order",
+          element: <Order />,
+          loader: Loader
+        },
+
+      ]
+
+    }
+  ])
+
   return (
     <div >
-      <Header />
-      <Routes>
-        <Route path='/' element={<MainHome />} />
-        <Route path='/shop' element={<Shop />} />
-        <Route path='/inventory' element={<Shop />} />
-      </Routes>
-      <Footer></Footer>
+      <RouterProvider router={route} />
     </div >
   );
 };

@@ -5,22 +5,18 @@ import { addToDb, getFromLocalDb } from '../../../utilities/fakedb';
 import DetailsModal from '../DetailsModal/DetailsModal';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import Product from '../Product/Product';
+import { Link, useLoaderData } from 'react-router-dom';
 
 
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const { products } = useLoaderData()
     const [cart, setCart] = useState([]);
     const [details, setDetails] = useState([]);
     const [more, setMore] = useState(true);
 
     document.title = "Ema-Shop | Shop"
 
-    useEffect(() => {
-        fetch("products.json")
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [])
 
     useEffect(() => {
         const getFromLocalCart = getFromLocalDb();
@@ -81,7 +77,12 @@ const Shop = () => {
 
                 {/* cart container */}
                 <div className="cart-container bg-gray-200 w-full lg:w-1/5 rounded-xl pb-10 lg:pb-0 lg:h-[100vh] lg:sticky top-0">
-                    <ShoppingCart cart={cart} setCart={setCart} className="" />
+                    <ShoppingCart cart={cart} setCart={setCart} className="">
+                        <Link to="/order"><div className='flex justify-between px-5 mt-5'>
+                            <button className="btn btn-outline border-red-500 border-2 text-red-500 hover:bg-red-500 hover:border-none hover:text-white  w-full px-5  duration-200">
+                                Review cart </button>
+                        </div></Link>
+                    </ShoppingCart>
 
                 </div>
                 <DetailsModal details={details} handleModal={handleModal}></DetailsModal>

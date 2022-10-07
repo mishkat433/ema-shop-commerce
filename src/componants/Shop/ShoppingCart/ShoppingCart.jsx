@@ -4,7 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { deleteShoppingCart } from '../../../utilities/fakedb';
 import Swal from 'sweetalert2';
 
-const ShoppingCart = ({ cart, setCart }) => {
+const ShoppingCart = ({ cart, setCart, children }) => {
 
     let total = 0;
     let shippingCharge = 0;
@@ -29,7 +29,7 @@ const ShoppingCart = ({ cart, setCart }) => {
     }
 
     return (
-        <div className='bg-gray-200 ' >
+        <div className=' ' >
             <h1 className='text-center text-2xl font-semibold my-10'>Order Summary</h1>
             <div className='flex flex-col gap-y-3'>
                 <div className='flex justify-between px-5'>
@@ -52,6 +52,7 @@ const ShoppingCart = ({ cart, setCart }) => {
                         Remove All Items <FontAwesomeIcon icon={faTrash} className="ml-5" > </FontAwesomeIcon></button>
                 </div>
             </div>
+            {children}
         </div>
     );
 };

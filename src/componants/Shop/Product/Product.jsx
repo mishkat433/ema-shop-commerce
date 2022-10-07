@@ -8,7 +8,7 @@ const Product = (props) => {
     return (
         <label htmlFor="my-modal-3" className="" onClick={() => handleModal(product)} data-aos="zoom-out">
             <div className="card bg-cyan-700 shadow-xl">
-                <img className='w-full h-[250px]' src={img} alt="figure not found" />
+                <img className='w-full h-[250px]' src={img ? img : "not found"} alt="figure not found" />
                 <div className="card-body h-[220px] text-white mb-5">
                     <h2 className="card-title">{name}</h2>
                     <div className='flex justify-between items-center mt-3 text-lg'>
