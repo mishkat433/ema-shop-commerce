@@ -4,8 +4,7 @@ import Header from '../Common/Header/Header';
 
 
 const NotFound = () => {
-    const error = useRouteError()
-    console.log(error);
+    const error = useRouteError();
     return (
         <div>
             <Header />
@@ -18,7 +17,6 @@ const NotFound = () => {
                         <p className='mt-5 text-3xl'>{error.statusText || error.message}</p>
                     </div>
                 }
-
             </div>
         </div>
     );

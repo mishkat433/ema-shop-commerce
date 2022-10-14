@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from "../../../images/Ema-shop-logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { userContex } from '../../../App';
+import app from '../../../Firebase/Firebase.init';
+import { getAuth, signOut } from 'firebase/auth';
+import notFoundImage from "../../../images/notFound.png"
+
+
+const auth = getAuth(app);
 
 const Header = () => {
-    const [bar, setBar] = useState(false)
+    const [bar, setBar] = useState(false);
+    const [dataContex, setdataContex] = useContext(userContex);
+
+    const logoutHandle = () => {
+        signOut(auth)
+            .then(() => {
+                setdataContex({})
+            }).catch((error) => {
+                // An error happened.
+            });
+    }
+
     return (
         <div className='bg-cyan-800'>
             <div className="navbar w-11/12 mx-auto pb-4">
@@ -18,12 +36,39 @@ const Header = () => {
                 }
                 <div className="flex-none ">
                     <div className={`${bar ? "block absolute lg:static top-16  text-center px-3 pb-2 right-0 rounded-lg bg-cyan-800" : "hidden"} lg:block `}>
-                        <ul className=" lg:flex lg:flex-row gap-8 text-gray-200 text-md lg:text-lg" onClick={() => setBar(false)}>
+                        <ul className=" lg:flex lg:flex-row items-center gap-8 text-gray-200 text-md lg:text-lg" onClick={() => setBar(false)}>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/shop'>Shop</NavLink></li>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/order'>Order</NavLink></li>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/inventory'>Inventory</NavLink></li>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink to='/'>About</NavLink></li>
-                            <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink to='/'>Login</NavLink></li>
+                            {
+                                dataContex.uid ? <li className="dropdown dropdown">
+                                    <div className="flex justify-end flex-1 ">
+                                        <div className="dropdown dropdown-end">
+                                            <label tabIndex={0} className="flex items-center gap-2">
+                                                <img className='w-9 rounded-full' src={dataContex.photo ? dataContex.photo : notFoundImage} alt="dashboard" />
+                                                <FontAwesomeIcon icon={faChevronDown} />
+                                            </label>
+                                            <ul tabIndex={0} className="menu dropdown-content p-2 shadow bg-base-100 text-black text-lg rounded-lg mt-6">
+                                                <li className=''><h4 className='pb-0 hover:bg-none'>{dataContex.name}</h4>
+                                                    <p className='text-sm pt-0 hover:bg-none'>{dataContex.email} </p>
+                                                </li>
+                                                <li>
+                                                    <h4 onClick={logoutHandle}>LogOut</h4>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                    :
+                                    <div className='flex gap-8'>
+                                        <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/login'>Login</NavLink></li>
+                                        <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/register'>Register</NavLink></li>
+                                    </div>
+                            }
+
                         </ul>
                     </div>
                 </div>
