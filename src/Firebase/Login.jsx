@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import app from './Firebase.init';
 import loginImg from "../images/loginImage.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { userContex } from '../App';
 import { Link } from 'react-router-dom';
+
 import Swal from 'sweetalert2';
+import useFirebase from './useFirebase';
 
 const auth = getAuth(app);
 
@@ -16,47 +18,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [show, setShow] = useState(true)
 
-    const googleProvider = new GoogleAuthProvider();
-    const githubProvider = new GithubAuthProvider();
-    const facebookProvider = new FacebookAuthProvider();
-
-
-    const googleSigninHandle = () => {
-        signInWithPopup(auth, googleProvider)
-            .then(result => {
-                console.log(result.user);
-                setData(result.user);
-                setError("");
-            })
-            .catch(err => {
-                console.log(err);
-                setError(err.message)
-            })
-    }
-
-    const githubSignInHandle = () => {
-        signInWithPopup(auth, githubProvider)
-            .then(result => {
-                console.log(result);
-                setData(result.user);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-    const facebookSigninHanlde = () => {
-        signInWithPopup(auth, facebookProvider)
-            .then(result => {
-                // const credential = FacebookAuthProvider.credentialFromResult(result);
-                // const token = credential.accessToken;
-                console.log(result);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
+    const { googleSigninHandle, githubSignInHandle, facebookSigninHanlde, faild } = useFirebase();
 
     const submitHanlde = (e) => {
         const email = e.target.email.value;
@@ -69,6 +31,7 @@ const Login = () => {
                         "Login Successfull",
                         "success"
                     )
+
                 }
                 else {
                     // reSendVarifyEmail()
@@ -139,6 +102,7 @@ const Login = () => {
             </div>
             <div className='w-1/2 my-14'>
                 {error && <p className='text-red-500 mb-4 text-lg'>{error}</p>}
+                {faild && <p className='text-red-500 mb-4 text-lg'>{faild}</p>}
                 <div className='bg-cyan-700 w-3/5 p-5 rounded-xl'>
                     <form className='text-white text-md' onSubmit={submitHanlde}>
                         <div className="mb-6">
@@ -153,7 +117,7 @@ const Login = () => {
                             <div className="flex items-center h-5">
                                 <input onClick={() => setShow(!show)} id="remember" type="checkbox" value="" className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3" />
                             </div>
-                            <label htmlFor="remember" className="ml-2  ">Show password</label>
+                            <label htmlFor="remember" className="ml-2 ">Show password</label>
                         </div>
                         <input type="submit" className="btn bg-orange-600 w-full" value="Login" />
                     </form>

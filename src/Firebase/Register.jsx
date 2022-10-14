@@ -1,9 +1,12 @@
+import { faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import loginImg from "../images/loginImage.png";
 import app from './Firebase.init';
+import useFirebase from './useFirebase';
 
 
 const auth = getAuth(app)
@@ -12,6 +15,8 @@ const Register = () => {
     const [inputvalue, setInputValue] = useState({})
     const [error, setError] = useState('')
     const [show, setShow] = useState(true)
+
+    const { googleSigninHandle, githubSignInHandle, facebookSigninHanlde, faild } = useFirebase();
 
     const registerHandle = (e) => {
         e.preventDefault()
@@ -23,6 +28,7 @@ const Register = () => {
                     Swal.fire(
                         'Check your email inbox or spam box  and verify',
                     );
+                    e.target.reset();
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -80,6 +86,7 @@ const Register = () => {
             </div>
             <div className='w-1/2 mt-10 mb-14'>
                 {error && <p className='text-red-500 mb-4 text-lg'>{error}</p>}
+                {faild && <p className='text-red-500 mb-4 text-lg'>{faild}</p>}
                 <div className='bg-cyan-700 w-3/5 p-5 rounded-xl shadow-2xl  '>
                     <form className='text-white text-md' onSubmit={registerHandle}>
                         <div className="mb-5">
@@ -108,14 +115,14 @@ const Register = () => {
                         <input type="submit" className="btn bg-orange-600 w-full" value="Register" />
                     </form>
                     <h4 className='mt-3 text-white inline-block'>Already have an account? <Link className='text-cyan-100 hover:text-cyan-50' to="/login">Login.</Link></h4>
-                    {/* <hr className='border-white border-spacing-2 my-6' /> */}
+                    <hr className='border-white border-spacing-2 my-6' />
                     <div className='text-white'>
-                        {/* <h4 className='text-xl text-center font-medium'>Login With</h4> */}
-                        {/* <div className='flex justify-around text-gray-300  text-4xl mt-5'>
+                        <h4 className='text-xl text-center font-medium'>Login With</h4>
+                        <div className='flex justify-around text-gray-300  text-4xl mt-5'>
                             <button onClick={facebookSigninHanlde} className="hover:text-white duration-300 hover:scale-110"><FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon></button>
                             <button onClick={googleSigninHandle} className="hover:text-white duration-300 hover:scale-110"><FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon></button>
                             <button onClick={githubSignInHandle} className="hover:text-white duration-300 hover:scale-110"><FontAwesomeIcon icon={faGithub} ></FontAwesomeIcon></button>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
