@@ -27,7 +27,6 @@ const Login = () => {
                 console.log(result.user);
                 setData(result.user);
                 setError("");
-                window.location.assign("/")
             })
             .catch(err => {
                 console.log(err);
