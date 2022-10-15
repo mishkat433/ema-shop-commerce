@@ -89,23 +89,23 @@ const Register = () => {
                 {faild && <p className='text-red-500 mb-4 text-lg'>{faild}</p>}
                 <div className='bg-cyan-700 w-3/5 p-5 rounded-xl shadow-2xl  '>
                     <form className='text-white text-md' onSubmit={registerHandle}>
-                        <div className="mb-5">
-                            <label htmlFor="name" className="block mb-2  ">Your full name</label>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="block mb-1  ">Your full name</label>
                             <input type="text" onBlur={inputHandle} name="name" className="bg-white border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5  " placeholder="Enter your name : " required />
                         </div>
-                        <div className="mb-5">
-                            <label htmlFor="email" className="block mb-2  ">Your email</label>
+                        <div className="mb-3">
+                            <label htmlFor="email" className="block mb-1  ">Your email</label>
                             <input type="email" onBlur={inputHandle} name="email" className="bg-white border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5  " placeholder="Enter your email : " required />
                         </div>
-                        <div className="mb-5">
-                            <label htmlFor="password" className="block mb-2 ">New password</label>
+                        <div className="mb-3">
+                            <label htmlFor="password" className="block mb-1 ">New password</label>
                             <input type={show ? "password" : "text"} onBlur={inputHandle} name="password" className="bg-white border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5" placeholder='Enter a new password : ' required />
                         </div>
-                        <div className="mb-5">
-                            <label htmlFor="confirm" className="block mb-2 ">Confirm password</label>
+                        <div className="mb-3">
+                            <label htmlFor="confirm" className="block mb-1 ">Confirm password</label>
                             <input type={show ? "password" : "text"} onBlur={inputHandle} name="confirm" className="bg-white border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 " placeholder='Confirm : ' required />
                         </div>
-                        <div className="flex items-start mb-6">
+                        <div className="flex items-start mb-4">
                             <div className="flex items-center h-5">
                                 <input onClick={() => setShow(!show)} id="remember" type="checkbox" value="" className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3" />
                             </div>
@@ -115,10 +115,10 @@ const Register = () => {
                         <input type="submit" className="btn bg-orange-600 w-full" value="Register" />
                     </form>
                     <h4 className='mt-3 text-white inline-block'>Already have an account? <Link className='text-cyan-100 hover:text-cyan-50' to="/login">Login.</Link></h4>
-                    <hr className='border-white border-spacing-2 my-6' />
+                    <hr className='border-white my-4' />
                     <div className='text-white'>
                         <h4 className='text-xl text-center font-medium'>Login With</h4>
-                        <div className='flex justify-around text-gray-300  text-4xl mt-5'>
+                        <div className='flex justify-around text-gray-300  text-4xl mt-3'>
                             <button onClick={facebookSigninHanlde} className="hover:text-white duration-300 hover:scale-110"><FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon></button>
                             <button onClick={googleSigninHandle} className="hover:text-white duration-300 hover:scale-110"><FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon></button>
                             <button onClick={githubSignInHandle} className="hover:text-white duration-300 hover:scale-110"><FontAwesomeIcon icon={faGithub} ></FontAwesomeIcon></button>

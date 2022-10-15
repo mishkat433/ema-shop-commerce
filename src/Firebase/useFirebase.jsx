@@ -5,6 +5,7 @@ import { userContex } from "../App";
 import app from "./Firebase.init";
 
 
+
 const useFirebase = () => {
     const [dataContex, setdataContex] = useContext(userContex)
     const [faild, setFaild] = useState('')
@@ -34,6 +35,7 @@ const useFirebase = () => {
             .then(result => {
                 setData(result.user);
                 navigate("/")
+                setFaild('')
             })
             .catch(err => {
                 setFaild(err.message)
@@ -43,14 +45,16 @@ const useFirebase = () => {
     const facebookSigninHanlde = () => {
         signInWithPopup(auth, facebookProvider)
             .then(result => {
-                // const credential = FacebookAuthProvider.credentialFromResult(result);
-                // const token = credential.accessToken;
-                console.log(result);
+                setData(result.user)
+                setFaild('')
             })
             .catch(err => {
                 setFaild(err.message)
             })
     }
+
+
+
 
     const setData = (logInfo) => {
         const prev = { ...dataContex }
