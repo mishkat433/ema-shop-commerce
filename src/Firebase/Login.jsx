@@ -1,107 +1,36 @@
-import React, { useContext, useState } from 'react';
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
-import app from './Firebase.init';
+import React, { useState } from 'react';
 import loginImg from "../images/loginImage.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { userContex } from '../App';
 import { Link } from 'react-router-dom';
-
-import Swal from 'sweetalert2';
 import useFirebase from './useFirebase';
 
-const auth = getAuth(app);
 
 const Login = () => {
-    const [dataContex, setdataContex] = useContext(userContex)
-    const [error, setError] = useState('')
-    const [email, setEmail] = useState('')
-    const [show, setShow] = useState(true)
+    const [email, setEmail] = useState('');
+    const [show, setShow] = useState(true);
 
-    const { googleSigninHandle, githubSignInHandle, facebookSigninHanlde, faild } = useFirebase();
+    const { googleSigninHandle, githubSignInHandle, resetHandle, facebookSigninHanlde, faild, loading, userLogin } = useFirebase();
 
     const submitHanlde = (e) => {
         const email = e.target.email.value;
         const password = e.target.password.value;
-        signInWithEmailAndPassword(auth, email, password)
-            .then(result => {
-                if (result.user.emailVerified) {
-                    setData(result.user)
-                    Swal.fire(
-                        "Login Successfull",
-                        "success"
-                    )
-
-                }
-                else {
-                    // reSendVarifyEmail()
-                    Swal.fire(
-                        'Your email is not verified',
-                    );
-                }
-                setError('')
-            })
-            .catch(err => {
-                setError(err.message)
-            })
+        userLogin(email, password);
         e.preventDefault()
-    }
-    const setData = (logInfo) => {
-        const prev = { ...dataContex }
-        prev.email = logInfo.email;
-        prev.name = logInfo.displayName;
-        prev.photo = logInfo.photoURL;
-        prev.uid = logInfo.uid;
-        setdataContex(prev)
     }
 
     const passwordResetHandle = () => {
-        if (email) {
-            sendPasswordResetEmail(auth, email)
-                .then(result => {
-                    Swal.fire('check your email inbox or spam box and set a new password',);
-                })
-                .catch(err => setError(err.message))
-        }
-        else { alert("Enter your email those password you want to change.") }
+        resetHandle(email)
     }
-
-    // const reSendVarifyEmail = () => {
-    //     Swal.fire({
-    //         title: "Your email is not verified",
-    //         text: "Do you wand to resend email?",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonText: "Yes, Resend it"
-    //     })
-    //         .then(result => {
-
-
-    //             if (result.isConfirmed) {
-    //                 emailVerify()
-    //                 Swal.fire(
-    //                     "Send",
-    //                     "Please check your email",
-    //                     "success"
-    //                 )
-    //             }
-    //         });
-    // }
-
-
-    // const emailVerify = () => {
-    //     sendEmailVerification(auth.currentUser)
-    //         .then(res => { })
-    // }
 
 
     return (
         <div className='w-11/12 mx-auto flex justify-between items-center'>
+            {loading && <h1>Loading...</h1>}
             <div className='w-1/2 hidden md:block'>
                 <img src={loginImg} alt="Login" />
             </div>
             <div className='w-1/2 my-14'>
-                {error && <p className='text-red-500 mb-4 text-lg'>{error}</p>}
                 {faild && <p className='text-red-500 mb-4 text-lg'>{faild}</p>}
                 <div className='bg-cyan-700 w-3/5 p-5 rounded-xl'>
                     <form className='text-white text-md' onSubmit={submitHanlde}>
@@ -121,7 +50,7 @@ const Login = () => {
                         </div>
                         <input type="submit" className="btn bg-orange-600 w-full" value="Login" />
                     </form>
-                    <h4 className='mt-3 text-white inline-block'>Do not have an account? <Link className='text-cyan-100 hover:text-cyan-50' to="/register">Please Register.</Link></h4>
+                    <h4 className='mt-3 text-white inline-block'>Do not have an account? <Link className='text-cyan-100 btn btn-link pl-0 hover:text-cyan-50' to="/register">Please Register.</Link></h4>
                     <h4 className='mt-2 text-white cursor-pointer inline-block hover:text-cyan-100' onClick={passwordResetHandle}>Forgot your password?</h4>
                     <hr className='border-white border-spacing-2 my-6' />
                     <div className='text-white'>

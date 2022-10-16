@@ -1,57 +1,27 @@
 import { faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import loginImg from "../images/loginImage.png";
-import app from './Firebase.init';
 import useFirebase from './useFirebase';
 
 
-const auth = getAuth(app)
-
 const Register = () => {
     const [inputvalue, setInputValue] = useState({})
-    const [error, setError] = useState('')
     const [show, setShow] = useState(true)
 
-    const { googleSigninHandle, githubSignInHandle, facebookSigninHanlde, faild } = useFirebase();
+    const { googleSigninHandle, githubSignInHandle, createUser, facebookSigninHanlde, faild, setFaild } = useFirebase();
 
     const registerHandle = (e) => {
         e.preventDefault()
         if (inputvalue.password === inputvalue.confirm) {
-            createUserWithEmailAndPassword(auth, inputvalue.email, inputvalue.password)
-                .then(result => {
-                    updateuser();
-                    emailVerify();
-                    Swal.fire(
-                        'Check your email inbox or spam box  and verify',
-                    );
-                    e.target.reset();
-                })
-                .catch(err => {
-                    console.log(err.message);
-                    setError(err.message)
-                })
-            setError('')
+            createUser(inputvalue.email, inputvalue.password, inputvalue.name);
+            e.target.reset();
         }
         else {
-            setError("new password and confirm password are not same")
+            setFaild("new password and confirm password are not same");
         }
     }
-
-    const updateuser = () => {
-        updateProfile(auth.currentUser, { displayName: inputvalue.name })
-            .then(result => { })
-            .catch(err => { console.log(err.message) })
-    }
-
-    const emailVerify = () => {
-        sendEmailVerification(auth.currentUser)
-            .then(res => { })
-    }
-
 
     const inputHandle = (even) => {
         let isValid = true;
@@ -64,12 +34,14 @@ const Register = () => {
             const validPass = /\d{1}/.test(even.target.value)
             isValid = isValidLen && validPass
         }
+        else {
+            setFaild("password must be minimun 6 character and use atleast 1 digit.")
+        }
         if (even.target.name === "confirm") {
             const isValidLen = even.target.value.length >= 6
             const validPass = /\d{1}/.test(even.target.value)
             isValid = isValidLen && validPass
         }
-
         if (isValid) {
             const store = { ...inputvalue };
             store[even.target.name] = even.target.value;
@@ -78,14 +50,12 @@ const Register = () => {
     }
 
 
-
     return (
         <div className='w-11/12 mx-auto flex gap-10 justify-between items-center'>
             <div className='w-1/2 hidden md:block'>
                 <img src={loginImg} alt="Login" />
             </div>
             <div className='w-1/2 mt-10 mb-14'>
-                {error && <p className='text-red-500 mb-4 text-lg'>{error}</p>}
                 {faild && <p className='text-red-500 mb-4 text-lg'>{faild}</p>}
                 <div className='bg-cyan-700 w-3/5 p-5 rounded-xl shadow-2xl  '>
                     <form className='text-white text-md' onSubmit={registerHandle}>
@@ -114,8 +84,8 @@ const Register = () => {
 
                         <input type="submit" className="btn bg-orange-600 w-full" value="Register" />
                     </form>
-                    <h4 className='mt-3 text-white inline-block'>Already have an account? <Link className='text-cyan-100 hover:text-cyan-50' to="/login">Login.</Link></h4>
-                    <hr className='border-white my-4' />
+                    <h4 className=' text-white inline-block'>Already have an account? <Link className='text-cyan-100 btn btn-link pl-0  hover:text-cyan-50' to="/login">Login.</Link></h4>
+                    <hr className='border-white my-2' />
                     <div className='text-white'>
                         <h4 className='text-xl text-center font-medium'>Login With</h4>
                         <div className='flex justify-around text-gray-300  text-4xl mt-3'>

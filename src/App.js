@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -11,14 +11,13 @@ import Inventory from './componants/Inventory/Inventory';
 import NotFound from './componants/NotFound/NotFound';
 import Login from './Firebase/Login';
 import Register from './Firebase/Register';
+import Contex from './Contex/Contex';
+import PrivateRoute from './componants/PrivateRoute/PrivateRoute';
+import OrderList from './componants/OrderList/OrderList';
 
-export const userContex = createContext()
 
 
 const App = () => {
-  const [dataContex, setdataContex] = useState({})
-  // console.log(dataContex);
-
   useEffect(() => {
     AOS.init()
     AOS.refresh()
@@ -58,7 +57,13 @@ const App = () => {
           path: "/register",
           element: <Register />,
           loader: Loader
+        },
+        {
+          path: "/confirm",
+          element: <PrivateRoute><OrderList /> </PrivateRoute>,
+          loader: Loader
         }
+
 
       ]
 
@@ -69,9 +74,9 @@ const App = () => {
 
   return (
     <div >
-      <userContex.Provider value={[dataContex, setdataContex]}>
+      <Contex>
         <RouterProvider router={route} />
-      </userContex.Provider>
+      </Contex>
     </div >
   );
 };
