@@ -5,15 +5,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from "./Layout/Main"
 import Shop from './componants/Shop/Mainshop/Shop';
 import MainHome from './componants/Home/MainHome/MainHome';
-import Order from './componants/Order.jsx/Order';
 import { Loader } from './Loader/Loader';
+import Order from "./componants/Order/Order"
 import Inventory from './componants/Inventory/Inventory';
 import NotFound from './componants/NotFound/NotFound';
 import Login from './Firebase/Login';
 import Register from './Firebase/Register';
 import Contex from './Contex/Contex';
 import PrivateRoute from './componants/PrivateRoute/PrivateRoute';
-import OrderList from './componants/OrderList/OrderList';
+import Shipping from './componants/Shipping/Shipping';
 
 
 
@@ -50,8 +50,8 @@ const App = () => {
           element: <Register />,
         },
         {
-          path: "/confirm",
-          element: <PrivateRoute><OrderList /> </PrivateRoute>,
+          path: "/shipping",
+          element: <PrivateRoute><Shipping /> </PrivateRoute>,
         }
       ]
     }

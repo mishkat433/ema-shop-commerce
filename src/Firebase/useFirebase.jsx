@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContex } from "../Contex/Contex";
 import app from "./Firebase.init";
@@ -8,8 +8,11 @@ import app from "./Firebase.init";
 
 
 const useFirebase = () => {
-    const { loading, } = useContext(AuthContex)
+    const { loading, setLoading } = useContext(AuthContex)
     const [faild, setFaild] = useState('');
+
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const auth = getAuth(app);
 
@@ -20,10 +23,11 @@ const useFirebase = () => {
     const navigate = useNavigate();
 
     const googleSigninHandle = () => {
+        setLoading(true)
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 setFaild("");
-                navigate("/")
+                navigate(from, { replace: true })
             })
             .catch(err => {
                 setFaild(err.message)
@@ -32,9 +36,10 @@ const useFirebase = () => {
     }
 
     const githubSignInHandle = () => {
+        setLoading(true)
         signInWithPopup(auth, githubProvider)
             .then(result => {
-                navigate("/")
+                navigate(from, { replace: true })
                 setFaild('')
             })
             .catch(err => {
@@ -43,10 +48,11 @@ const useFirebase = () => {
     }
 
     const facebookSigninHanlde = () => {
+        setLoading(true);
         signInWithPopup(auth, facebookProvider)
             .then(result => {
                 setFaild('')
-                navigate("/")
+                navigate(from, { replace: true })
             })
             .catch(err => {
                 setFaild(err.message)
@@ -54,10 +60,11 @@ const useFirebase = () => {
     }
 
     const userLogin = (email, password) => {
+        setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 if (result.user) {
-                    navigate("/")
+                    navigate(from, { replace: true })
                     Swal.fire("Login Successfull", "success")
                 }
                 else {
