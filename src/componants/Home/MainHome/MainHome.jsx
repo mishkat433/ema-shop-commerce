@@ -3,7 +3,8 @@ import HomeBanner from '../HomeBanner/HomeBanner';
 
 
 const MainHome = () => {
-    document.title = "Ema-Shop | Home"
+    document.title = "Ema-Shop | Home";
+
     return (
         <div className='w-11/12 mx-auto'>
             <HomeBanner />

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -8,9 +8,8 @@ import app from "./Firebase.init";
 
 
 const useFirebase = () => {
-    const { setUser } = useContext(AuthContex)
+    const { loading, } = useContext(AuthContex)
     const [faild, setFaild] = useState('');
-    const [loading, setLoading] = useState(true)
 
     const auth = getAuth(app);
 
@@ -23,7 +22,6 @@ const useFirebase = () => {
     const googleSigninHandle = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
-                setUser(result.user);
                 setFaild("");
                 navigate("/")
             })
@@ -36,7 +34,6 @@ const useFirebase = () => {
     const githubSignInHandle = () => {
         signInWithPopup(auth, githubProvider)
             .then(result => {
-                setUser(result.user);
                 navigate("/")
                 setFaild('')
             })
@@ -48,8 +45,8 @@ const useFirebase = () => {
     const facebookSigninHanlde = () => {
         signInWithPopup(auth, facebookProvider)
             .then(result => {
-                setUser(result.user)
                 setFaild('')
+                navigate("/")
             })
             .catch(err => {
                 setFaild(err.message)
@@ -60,7 +57,7 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 if (result.user) {
-                    setUser(result.user)
+                    navigate("/")
                     Swal.fire("Login Successfull", "success")
                 }
                 else {
@@ -81,6 +78,7 @@ const useFirebase = () => {
                 Swal.fire(
                     'Check your email inbox or spam box  and verify',
                 );
+                navigate("/login")
             })
             .catch(err => {
                 setFaild(err.message)
@@ -96,16 +94,6 @@ const useFirebase = () => {
         sendEmailVerification(auth.currentUser)
             .then(res => { })
     }
-
-
-    useState(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
-            setLoading(false);
-        })
-        return () => unsubscribe;
-    }, [])
-
 
     const resetHandle = (email) => {
         if (email) {

@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import logo from "../../../images/Ema-shop-logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose, faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import app from '../../../Firebase/Firebase.init';
-import { getAuth, signOut } from 'firebase/auth';
 import notFoundImage from "../../../images/notFound.png"
 import { AuthContex } from '../../../Contex/Contex';
 
@@ -12,13 +10,12 @@ import { AuthContex } from '../../../Contex/Contex';
 
 const Header = () => {
     const [bar, setBar] = useState(false);
-    const { user } = useContext(AuthContex);
-
-    const auth = getAuth(app)
+    const { user, logOut } = useContext(AuthContex);
 
     const logoutHandle = () => {
-        signOut(auth)
+        logOut();
     }
+
     return (
         <div className='bg-cyan-800'>
             <div className="navbar w-11/12 mx-auto pb-4">

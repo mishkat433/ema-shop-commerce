@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import loginImg from "../images/loginImage.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 import useFirebase from './useFirebase';
+import { AuthContex } from '../Contex/Contex';
 
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(true);
+    const { user } = useContext(AuthContex);
 
-    const { googleSigninHandle, githubSignInHandle, resetHandle, facebookSigninHanlde, faild, loading, userLogin } = useFirebase();
+    const { googleSigninHandle, githubSignInHandle, resetHandle, facebookSigninHanlde, faild, userLogin } = useFirebase();
 
     const submitHanlde = (e) => {
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        userLogin(email, password);
-        e.preventDefault()
+        if (user && user.uid) {
+            alert("Already loged in");
+        }
+        else {
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+            userLogin(email, password);
+        }
+        e.preventDefault();
     }
 
     const passwordResetHandle = () => {
-        resetHandle(email)
+        resetHandle(email);
     }
-
 
     return (
         <div className='w-11/12 mx-auto flex justify-between items-center'>
-            {loading && <h1>Loading...</h1>}
             <div className='w-1/2 hidden md:block'>
                 <img src={loginImg} alt="Login" />
             </div>

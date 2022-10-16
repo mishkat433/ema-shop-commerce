@@ -15,8 +15,7 @@ const Shop = () => {
     const [details, setDetails] = useState([]);
     const [more, setMore] = useState(true);
 
-    document.title = "Ema-Shop | Shop"
-
+    document.title = "Ema-Shop | Shop";
 
     useEffect(() => {
         const getFromLocalCart = getFromLocalDb();

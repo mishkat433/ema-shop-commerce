@@ -37,7 +37,6 @@ const Order = () => {
                                 Confirm Order </button>
                         </div></Link>
                     </ShoppingCart>
-
                 </div>
             </div >
         </div>

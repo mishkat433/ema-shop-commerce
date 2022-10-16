@@ -19,7 +19,7 @@ const Register = () => {
             e.target.reset();
         }
         else {
-            setFaild("new password and confirm password are not same");
+            setFaild("Your password did not match");
         }
     }
 
@@ -33,9 +33,6 @@ const Register = () => {
             const isValidLen = even.target.value.length >= 6
             const validPass = /\d{1}/.test(even.target.value)
             isValid = isValidLen && validPass
-        }
-        else {
-            setFaild("password must be minimun 6 character and use atleast 1 digit.")
         }
         if (even.target.name === "confirm") {
             const isValidLen = even.target.value.length >= 6
@@ -69,7 +66,8 @@ const Register = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="block mb-1 ">New password</label>
-                            <input type={show ? "password" : "text"} onBlur={inputHandle} name="password" className="bg-white border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5" placeholder='Enter a new password : ' required />
+                            <input type={show ? "password" : "text"} onBlur={inputHandle} name="password" className="bg-white border mb-1 border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5" placeholder='Enter a new password : ' required />
+                            <p className='text-[13px]'>password minimun 6 character and use atleast 1 digit.</p>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="confirm" className="block mb-1 ">Confirm password</label>

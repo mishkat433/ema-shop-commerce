@@ -18,6 +18,7 @@ import OrderList from './componants/OrderList/OrderList';
 
 
 const App = () => {
+
   useEffect(() => {
     AOS.init()
     AOS.refresh()
