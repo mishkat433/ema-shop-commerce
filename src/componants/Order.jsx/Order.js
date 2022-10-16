@@ -14,9 +14,6 @@ const Order = () => {
         removeFromDb(id);
     }
 
-    const confirmHandle = () => {
-
-    }
 
     return (
         <div className='w-11/12 mx-auto flex flex-col md:flex-row mb-12'>
@@ -36,7 +33,7 @@ const Order = () => {
                 <div className="cart-container  w-full lg:w-2/5 rounded-xl pb-10 lg:pb-0 lg:h-[100vh] lg:sticky top-0 ">
                     <ShoppingCart cart={carts} setCart={setCart}>
                         <Link to="/confirm"><div className='flex justify-between px-5 mt-5'>
-                            <button onClick={confirmHandle} className="btn   bg-cyan-700 border-2 hover:scale-110 hover:bg-cyan-500 border-none hover:text-white  w-full px-5  duration-200" onClick={removeHandle}>
+                            <button className="btn   bg-cyan-700 border-2 hover:scale-110 hover:bg-cyan-500 border-none hover:text-white  w-full px-5  duration-200" onClick={removeHandle}>
                                 Confirm Order </button>
                         </div></Link>
                     </ShoppingCart>

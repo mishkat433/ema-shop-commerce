@@ -29,15 +29,8 @@ const App = () => {
       element: <Main></Main>,
       errorElement: <NotFound></NotFound>,
       children: [
-        {
-          index: "/",
-          element: <MainHome />,
-        },
-        {
-          path: "/shop",
-          loader: Loader,
-          element: <Shop />
-        },
+        { index: "/", element: <MainHome /> },
+        { path: "/shop", loader: Loader, element: <Shop /> },
         {
           path: "/order",
           element: <Order />,
@@ -46,30 +39,22 @@ const App = () => {
         {
           path: "/inventory",
           element: <Inventory />,
-          loader: Loader
         },
         {
           path: "/login",
           element: <Login />,
-          loader: Loader
         },
         {
           path: "/register",
           element: <Register />,
-          loader: Loader
         },
         {
           path: "/confirm",
           element: <PrivateRoute><OrderList /> </PrivateRoute>,
-          loader: Loader
         }
-
-
       ]
-
     }
   ])
-
 
 
   return (
