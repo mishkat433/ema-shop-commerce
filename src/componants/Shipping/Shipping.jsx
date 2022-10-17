@@ -56,7 +56,7 @@ const OrderList = () => {
             {error && <h4 className='text-center text-red-500 mt-5'>{error}</h4>}
             <div className="hero h-full lg:min-h-[85vh] ">
                 <div className="hero-content w-full md:w-4/5 mt-5 lg:mt-5 lg:pt-0 flex-col-reverse justify-between gap-x-20 md:mt-5 lg:mt-0 md:flex-row-reverse">
-                    <div className="text-center lg:text-left w-2/5">
+                    <div className="text-center lg:text-left w-full lg:w-2/5">
                         <h1 className="text-5xl font-bold">Payment</h1>
                         <button disabled={carts.length === 0 ? true : false} onClick={confirmSubmitHandle} className='btn btn-success w-full mt-20'>Confirm Order</button>
                     </div>
