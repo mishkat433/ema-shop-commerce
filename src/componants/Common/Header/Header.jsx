@@ -26,8 +26,8 @@ const Header = () => {
                     bar ? <FontAwesomeIcon className='text-white lg:hidden' icon={faClose} onClick={() => setBar(!bar)} /> :
                         <FontAwesomeIcon className='text-white lg:hidden' icon={faBars} onClick={() => setBar(!bar)} />
                 }
-                <div className="flex-none ">
-                    <div className={`${bar ? "block absolute lg:static top-16  text-center px-3 pb-2 right-0 rounded-lg bg-cyan-800" : "hidden"} lg:block `}>
+                <div className="flex-none">
+                    <div className={`${bar ? "block absolute lg:static top-16 w-full  text-center px-3 pb-2 z-10 right-0 rounded-lg bg-cyan-800" : "hidden"} lg:block `}>
                         <ul className=" lg:flex lg:flex-row items-center gap-8 text-gray-200 text-md lg:text-lg" onClick={() => setBar(false)}>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/shop'>Shop</NavLink></li>
                             <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/order'>Order</NavLink></li>
@@ -53,7 +53,7 @@ const Header = () => {
                                     </div>
                                 </li>
                                     :
-                                    <div className='flex gap-8'>
+                                    <div className='flex flex-col lg:flex-row lg:gap-8'>
                                         <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/login'>Login</NavLink></li>
                                         <li className='hover:text-white duration-300 mb-3 lg:mb-0'><NavLink className={({ isActive }) => isActive ? "bg-white px-2 py-1 rounded-md  text-black" : undefined} to='/register'>Register</NavLink></li>
                                     </div>

@@ -39,7 +39,7 @@ const App = () => {
         },
         {
           path: "/inventory",
-          element: <Inventory />,
+          element: <PrivateRoute><Inventory /></PrivateRoute>,
         },
         {
           path: "/login",
@@ -51,6 +51,7 @@ const App = () => {
         },
         {
           path: "/shipping",
+          loader: Loader,
           element: <PrivateRoute><Shipping /> </PrivateRoute>,
         }
       ]

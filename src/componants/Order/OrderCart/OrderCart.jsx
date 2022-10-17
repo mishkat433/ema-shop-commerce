@@ -6,10 +6,10 @@ const OrderCart = ({ cart, removeHandle }) => {
     const { img, price, name, shipping, id, quantity } = cart
     return (
         <div>
-            <div className='flex border-2 rounded-xl mb-3 p-1 justify-between items-center'>
+            <div className='flex  border-2 rounded-xl mb-3 p-1 justify-between items-center'>
 
-                <div className='flex '>
-                    <figure><img className='w-20 rounded-lg mr-4' src={img} alt="" /></figure>
+                <div className='flex items-center'>
+                    <figure><img className='w-20 md:w-40 lg:w-24 rounded-lg mr-4' src={img} alt="" /></figure>
                     <div>
                         <h2 className='text-2xl'>{name}</h2>
                         <p>Price : <span className='text-orange-500'>${price}</span></p>

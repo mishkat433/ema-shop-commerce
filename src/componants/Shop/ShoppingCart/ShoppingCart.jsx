@@ -25,7 +25,6 @@ const ShoppingCart = ({ cart, setCart, children }) => {
             'You clicked the button!',
             'success'
         );
-
     }
 
     return (

@@ -85,7 +85,7 @@ const useFirebase = () => {
                 Swal.fire(
                     'Check your email inbox or spam box  and verify',
                 );
-                navigate("/login")
+                navigate(from, { replace: true })
             })
             .catch(err => {
                 setFaild(err.message)

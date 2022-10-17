@@ -6,7 +6,7 @@ const Product = (props) => {
     const { product, addToCartHandle, handleModal } = props;
     const { name, seller, price, stock, ratings, img, category } = product;
     return (
-        <label htmlFor="my-modal-3" className="" onClick={() => handleModal(product)} data-aos="zoom-out">
+        <label htmlFor="my-modal-3" className="" onClick={() => handleModal(product)} data-aos="zoom-in-up">
             <div className="card bg-cyan-700 shadow-xl">
                 <img className='w-full h-[250px]' src={img ? img : "not found"} alt="figure not found" />
                 <div className="card-body h-[220px] text-white mb-5">

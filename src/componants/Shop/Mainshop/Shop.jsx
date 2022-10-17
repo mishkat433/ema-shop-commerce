@@ -66,7 +66,7 @@ const Shop = () => {
 
             <div className='flex flex-col-reverse lg:flex-row w-11/12 gap-5 mx-auto mt-10' >
                 {/* product container */}
-                <div className="w-full lg:w-4/5 grid grid-cols-1 lg:grid-cols-3 gap-x-7 gap-y-10 ">
+                <div className="w-full lg:w-4/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-10 ">
                     {
                         more ? products.slice(0, 21).map(product => <Product product={product} key={product.id} addToCartHandle={addToCartHandle} handleModal={handleModal}></Product>)
                             :

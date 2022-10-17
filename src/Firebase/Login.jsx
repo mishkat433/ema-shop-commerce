@@ -11,6 +11,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(true);
     const { user } = useContext(AuthContex);
+    console.log(user);
 
 
     const { googleSigninHandle, githubSignInHandle, resetHandle, facebookSigninHanlde, faild, userLogin } = useFirebase();
@@ -33,12 +34,12 @@ const Login = () => {
 
     return (
         <div className='w-11/12 mx-auto flex justify-between items-center'>
-            <div className='w-1/2 hidden md:block'>
+            <div className='w-1/2 hidden lg:block '>
                 <img src={loginImg} alt="Login" />
             </div>
-            <div className='w-1/2 my-14'>
+            <div className='w-full lg:w-1/2 my-14'>
                 {faild && <p className='text-red-500 mb-4 text-lg'>{faild}</p>}
-                <div className='bg-cyan-700 w-3/5 p-5 rounded-xl'>
+                <div className='bg-cyan-700 lg:w-3/5 p-5 rounded-xl'>
                     <form className='text-white text-md' onSubmit={submitHanlde}>
                         <div className="mb-6">
                             <label htmlFor="email" className="block mb-2  ">Your email</label>
